@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+ -->
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <!-- 
+        <div>Saludos</div>
+        <p th:text="${Mensaje}"></p>
+        <br/>
+        <br/>
+        <p>Nombre: <span th:text="${cliente.nombre}"></span></p>
+        <p>Apellidos: <span th:text="${cliente.apellido}"></span></p>
+        <p>Correo: <span th:text="${cliente.correo}"></span></p>
+        <p>Nombre: <span th:text="${cliente.telefono}"></span></p>
+        -->
+        
+        
+        <h1>Lista de clientes</h1>
+        <div th:if="${clientes != null and !clientes.empty}">
+        <table border="1">
+            <thead>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Telefono</th>
+            <thead/>
+            <tbody>
+                <tr th:each="item : ${clientes}">
+                    <th th:text="${item.nombre}"></th>
+                    <th th:text="${item.apellido}"></th>
+                    <th th:text="${item.telefono}"></th>
+                    <th th:text="${item.correo}"></th>  
+            <tr/>
+            </tbody>
+        </table>
+            </div>
+        <div th:if="${clientes == null or clientes.empty}">
+            La lista esta vacia...
+            </div>
+    </body>
+</html>
+

@@ -14,6 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.TiendaM_1Q2023.Dao.ClienteDao;
+import com.TiendaM_1Q2023.Service.ClienteService;
+import org.springframework.web.bind.annotation.PostMapping;
 /**
  *
  * @author XPC
@@ -24,27 +26,42 @@ import com.TiendaM_1Q2023.Dao.ClienteDao;
 public class IndexController {
     
     @Autowired
-    ClienteDao clienteDao;
+    ClienteService clienteService;
     
     
     
     @GetMapping("/")
     public String inicio(Model model) {
-     //   log.info("Ahora desde mvc");
-       // model.addAttribute("Mensaje", "Hola desde el controlador");
-        
-        //Cliente cliente = new Cliente("Jonathan", "Brenes Blanco","hasddsa@gmail.com","91238213");
-          //      model.addAttribute("cliente",cliente);
-                
-                
-            //    Cliente cliente2 = new Cliente("Jonathan", "Brenes Blanco","hasddsa@gmail.com","91238213");
-              //  Cliente cliente3 = new Cliente("Jonathan", "Brenes Blanco","hasddsa@gmail.com","91238213");
-                
-                //List<Cliente> clientes = Arrays.asList(cliente, cliente2, cliente3);
-                var clientes = clienteDao.findAll();
+       log.info("Ahora desde MVC");
+       
+                var clientes = clienteService .getClientes();
                 model.addAttribute("clientes", clientes);
                 
         return "index";
+    }
+    
+    @GetMapping("/nuevoCliente")
+    public String nuevoCliente(Cliente cliente){
+        return "modificarCliente";
+    }
+    
+    @PostMapping("/guardarCliente")
+    public String guardarCliente(Cliente cliente){
+        clienteService.save(cliente);
+        return "redirect:/";
+    }
+    
+    @GetMapping("moficarCliente/{idCliente}")
+    public String modificarCliente(Cliente cliente, Model model){
+    cliente = clienteService.getCliente(cliente);
+            model.addAttribute("Cliente", cliente);
+            return "modificarCliente";
+
+    }
+    @GetMapping("eliminarCliente/{idCliente}")
+    public String eliminarCliente(Cliente cliente){
+     clienteService.delete(cliente);
+            return "redirect";
     }
     
 }

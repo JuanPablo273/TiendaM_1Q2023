@@ -12,19 +12,13 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
     </head>
     <body>
         
-        <!-- 
-        <div>Saludos</div>
-        <p th:text="${Mensaje}"></p>
-        <br/>
-        <br/>
-        <p>Nombre: <span th:text="${cliente.nombre}"></span></p>
-        <p>Apellidos: <span th:text="${cliente.apellido}"></span></p>
-        <p>Correo: <span th:text="${cliente.correo}"></span></p>
-        <p>Nombre: <span th:text="${cliente.telefono}"></span></p>
-        -->
         
         
-        <h1>Lista de clientes</h1>
+        <header th:replace="Layout/Plantilla :: header" />
+        <h2>Lista de clientes</h2>
+        <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>
+        <br/>
+        <br/>
         <div th:if="${clientes != null and !clientes.empty}">
         <table border="1">
             <thead>
@@ -32,13 +26,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             <th>Apellido</th>
             <th>Correo</th>
             <th>Telefono</th>
+            <th colspan="3">Acciones</th>
             <thead/>
             <tbody>
                 <tr th:each="item : ${clientes}">
-                    <th th:text="${item.nombre}"></th>
-                    <th th:text="${item.apellido}"></th>
-                    <th th:text="${item.telefono}"></th>
-                    <th th:text="${item.correo}"></th>  
+                    <td th:text="${item.nombre}"></td>
+                    <td th:text="${item.apellido}"></td>
+                    <td th:text="${item.telefono}"></td>
+                    <td th:text="${item.correo}"></td>  
+                    <td th:href="${/modificarCliente/}+ $ {item.idCliente">Modificar</td>  
+                    <td th:href="${/eliminarCliente/}+ $ {item.idCliente">Eliminar</td> 
             <tr/>
             </tbody>
         </table>
@@ -46,6 +43,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <div th:if="${clientes == null or clientes.empty}">
             La lista esta vacia...
             </div>
+        <footer th:replace="Layout/Plantilla :: footer" />
     </body>
 </html>
 

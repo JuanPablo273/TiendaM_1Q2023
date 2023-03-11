@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:th="http://www.w3.org/1999/xhtml">>
+    <head>
+        <title>TechShop</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/CSS/Menu.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace="Layout/Plantilla :: header" />
+        <div class="contenido">
+            <h1>Datos del Articulo</h1>
+        <a th:href="@{/articulo/listado}">Regresar</a>
+        <br/>
+        <br/>
+        <form th:action="@{/articulo/guardar}" 
+              method="POST"
+              th:object="${articulo}">
+            <input type="hidden" name="idArticulo" th:field="*{idArticulo}" /><br/>
+            <label for="categoria">Categoria</label><br/>
+            <select th:field="*{idCategoria}">
+                <option th:each="categoria:${categorias}"
+                        th:value="${categoria.idCategoria}"
+                        th:text="${categorias.descripcion}"/>
+            </select><br/>
+
+            <label for="descripcion">Descripcion</label><br/>
+            <input type="text" id="descripcion" name="descripcion" th:field="{descripcion}"/><br/>
+            
+            <label for="detalle">Detalle</label><br/>
+            <textarea  name="detalle" th:field="{detalle}" rows="6" cols="50"/><br/>
+            
+            <label for="precio">Precio</label><br/>
+            <input type="number" id="precio" name="precio" th:field="{precio}"/><br/>
+            
+            <label for="existencias">Existencias</label><br/>
+            <input type="number" id="existencias" name="existencias" th:field="{existencias}"/><br/>
+            
+            <label for="activo">Activo</label><br/>
+            <input type="checkbox" name="activo" th:field="{activo}"/><br/>
+
+            <input type="submit" name="guardar" value="Guardar" />
+
+        </form>
+        </div>
+        <footer th:replace="Layout/Plantilla :: footer" />
+    </body>
+</html>

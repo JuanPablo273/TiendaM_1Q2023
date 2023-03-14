@@ -1,49 +1,42 @@
-<!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
- -->
 
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/CSS/Menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        
-        
-        
-        <header th:replace="Layout/Plantilla :: header" />
-        <h2>Lista de clientes</h2>
-        <a th:href="@{/nuevoCliente}">Nuevo Cliente</a>
-        <br/>
-        <br/>
-        <div th:if="${clientes != null and !clientes.empty}">
-        <table border="1">
-            <thead>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Correo</th>
-            <th>Telefono</th>
-            <th colspan="3">Acciones</th>
-            <thead/>
-            <tbody>
-                <tr th:each="item : ${clientes}">
-                    <td th:text="${item.nombre}"></td>
-                    <td th:text="${item.apellido}"></td>
-                    <td th:text="${item.telefono}"></td>
-                    <td th:text="${item.correo}"></td>  
-                    <td th:href="${/modificarCliente/}+ $ {item.idCliente">Modificar</td>  
-                    <td th:href="${/eliminarCliente/}+ $ {item.idCliente">Eliminar</td> 
-            <tr/>
-            </tbody>
-        </table>
+
+
+
+        <header th:replace="layout/Plantilla :: header" />
+        <div class="contenido">
+            <h2>Articulos Disponibles</h2>
+            <br/>
+            <div th:if="${articulos != null and !articulos.empty}">
+                <table border="1">
+                    <thead>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                   
+                    <thead/>
+                    <tbody>
+                        <tr th:each="item : ${articulos}">
+                            <td th:text="${item.descripcion}"></td>
+                            <td th:text="${#numbers.formatDecimal(item.precio, 3, 2)}"></td>
+                            <td><a th:href="@{/carrito/agregar/}+ ${item.idArticulo}">Agregar<a/></td> 
+                        <tr/>
+                    </tbody>
+                </table>
             </div>
-        <div th:if="${clientes == null or clientes.empty}">
-            La lista esta vacia...
+            <div th:if="${articulos == null or articulos.empty}">
+                La lista esta vacia...
             </div>
-        <footer th:replace="Layout/Plantilla :: footer" />
+
+        </div>
+        <footer th:replace="layout/Plantilla :: footer" />
     </body>
 </html>
 

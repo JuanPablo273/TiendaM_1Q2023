@@ -51,4 +51,23 @@ public class ClienteServiceIMPL implements ClienteService {
         clienteDao.deleteById(cliente.getIdCliente());
     }
     
+    @Override
+    public List<Cliente> getClientePorNombre(String nombre){
+    return clienteDao.findByNombre(nombre);
+    
+    }
+    
+    @Override
+    public List<Cliente> getClientePorTelefono(String telefono){
+    return clienteDao.findByTelefono(telefono);
+    
+    }
+    
+    @Override
+    public List<Cliente> getClientePorNombreApellidos(String nombre, String apellidos){
+    return clienteDao.findByNombreAndApellidos(nombre, apellidos);
+
+  
+    }
+
 }

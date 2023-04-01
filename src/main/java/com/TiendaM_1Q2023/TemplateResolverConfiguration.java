@@ -17,7 +17,8 @@ public class TemplateResolverConfiguration {
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setOrder(0);
         templateResolver.setCheckExistence(true);
-        return templateResolver;            
+        return templateResolver;   
+        
     }
     @Bean    public SpringResourceTemplateResolver TemplateResolver_1() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();

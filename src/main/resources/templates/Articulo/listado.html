@@ -1,43 +1,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
+    <head th:replace="~{layout/plantilla :: head}">
         <title>TechShop</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/CSS/Menu.css" rel="stylesheet" type="text/css"/>
-        
-        <header th:replace="Layout/Plantilla :: header" />
-        <div class="contenido">
-            <h2>Lista de articulos</h2>
-            <a th:href="@{/articulo/nuevo}">Nuevo Articulo</a>
-            <br/>
-            <br/>
-            <div th:if="${articulos != null and !articulos.empty}">
-                <table border="1">
-                    <thead>
-                    <th>Descripcion</th>
-                    <th>Precio</th>
-                    <th>Existencias</th>
-                    <th>Activa</th>
-                    <thead/>
-                    <tbody>
-                        <tr th:each="articulo: ${articulos}">
-                            <td th:text="${articulo.descripcion}"></td>
-                            <td th:text="${#numbers.formatDecimal(articulo.precio, 3, 2)}" style="text-align: right"></td>
-                            <td th:text="${articulo.existencias}" style="text-align: center"></td>
-                            <td <input type="checkbox" name="activa" th:checked="${articulo.activo}" disabled="true"></td>
-                            <td><a th:href="@{/articulo/modificar/}+ ${articulo.idArticulo}">Modificar</a></td>  
-                            <td><a th:href="@{/articulo/eliminar/}+ ${articulo.idArticulo}">Eliminar</a></td> 
-                        <tr/>
-                    </tbody>
-                </table>
-            </div>
-            <div th:if="${articulos == null or articulos.empty}">
-                No tenmos arituclos que mostrar...
-            </div>
-
-        </div>
-        <footer th:replace="Layout/Plantilla :: footer" />
-    </body>
-</html>
+        <meta charset="UTF-8"/>
     </head>
     <body>
+
+        <header th:replace="layout/plantilla :: header" />
+
+        <section th:replace="articulo/fragmentosArticulo :: botonesAgregar"/>
+        <section th:replace="articulo/fragmentosArticulo :: agregarArticulo"/>
+        <section th:replace="articulo/fragmentosArticulo :: listadoArticulos"/>
+
+        <footer th:replace="layout/plantilla :: footer" />
+    </body>
+</html>

@@ -26,6 +26,9 @@ public class CategoriaController {
                 var categorias = categoriaService .getCategorias(false);
                 model.addAttribute("categorias", categorias);
                 
+                model.addAttribute("totalCategorias", categorias.size());
+                
+                
         return "/categoria/listado";
     }
     
@@ -43,8 +46,8 @@ public class CategoriaController {
     @GetMapping("categoria/modificar/{idCategoria}")
     public String modificarCategoria(Categoria categoria, Model model){
     categoria = categoriaService.getCategoria(categoria);
-            model.addAttribute("Categoria", categoria);
-            return "/categoria/modificarCategoria";
+            model.addAttribute("categoria", categoria);
+            return "/categoria/modificar";
 
     }
     @GetMapping("/categoria/eliminar/{idCategoria}")
